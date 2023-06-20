@@ -17,4 +17,3 @@ steps:
     env:
       default_serverless_devs_access: >-
         {"AccountID":"${{cloudSecrets.AccountID}}","AccessKeyID":"${{cloudSecrets.AccessKeyID}}","AccessKeySecret":"${{cloudSecrets.AccessKeySecret}}"}
-  - run: s deploy --use-local -y
