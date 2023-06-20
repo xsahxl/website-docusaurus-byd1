@@ -1,17 +1,9 @@
 name: Deploy Express application to FC
 steps:
-  - name: 缓存 npm 依赖包
-    plugin: '@serverless-cd/cache'
-    id: npmCache
-    inputs:
-      key: ${{hashFile('./code/package.json')}}
-      path: ./code/node_modules
   - run: npm i @serverless-devs/s -g --registry=https://registry.npmmirror.com
   - run: s -v
-  - name: 安装代码包依赖
-    run: npm install --production --registry=https://registry.npmmirror.com
+  - run: npm install --production --registry=https://registry.npmmirror.com
     working-directory: ./code
-    if: '${{steps.npmCache.outputs[''cache-hit''] != true}} '
   - name: 部署函数
     run: s deploy --use-local -y -a default_serverless_devs_access
     env:
